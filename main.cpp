@@ -58,19 +58,19 @@ public:
             exit(1);
         }
 
+        Node<E>* temp = cursor->next;
         E value = (cursor->next)->value;
-
-        if (cursor->next == tail) {
-            tail = cursor;
-        }
 
         cursor->next = (cursor->next)->next;
 
-        numberElements--;
-
-        if (cursor == tail) {
+        if (temp == tail) {
+            tail = cursor;
             cursorPrevious();
         }
+
+        numberElements--;
+
+        delete temp;
 
         return value;
     }
