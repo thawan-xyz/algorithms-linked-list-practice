@@ -6,13 +6,13 @@ template <typename E>
 class Node {
 public:
     E value;
-    Node* next;
+    Node<E>* next;
 
-    explicit Node(Node* nextNode = NULL) {
+    explicit Node(Node<E>* nextNode = NULL) {
         next = nextNode;
     }
 
-    explicit Node(E nodeValue, Node* nextNode = NULL) {
+    explicit Node(E nodeValue, Node<E>* nextNode = NULL) {
         value = nodeValue;
         next = nextNode;
     }

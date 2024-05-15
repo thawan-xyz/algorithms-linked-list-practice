@@ -37,7 +37,7 @@
     <option name="productBranch" value="Classic" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
+  &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2gTyA14fchuYWdSBbLpioteu9CP" />
   <component name="ProjectViewState">
@@ -80,7 +80,10 @@
       <workItem from="1715768087796" duration="10682000" />
       <workItem from="1715779288070" duration="46000" />
       <workItem from="1715779458155" duration="75000" />
-      <workItem from="1715797204037" duration="4000" />
+      <workItem from="1715797204037" duration="2283000" />
+      <workItem from="1715801098664" duration="140000" />
+      <workItem from="1715801482861" duration="8000" />
+      <workItem from="1715807325477" duration="119000" />
     </task>
     <servers />
   </component>
