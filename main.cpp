@@ -136,19 +136,5 @@ private:
 };
 
 int main() {
-    auto* pointerList = new LinkedList<int>;
-    for (int i = 1; i > 0; --i) {
-        pointerList->insert(i);
-    }
-    pointerList->print();
-    cout << "--------" << endl;
-    pointerList->remove();
-    cout << "--------" << endl;
-    pointerList->remove();
-    cout << "[" << pointerList->getCursorPosition() << "] = " << pointerList->getValue() << endl;
-    cout << "--------" << endl;
-
-
-    delete pointerList;
     return 0;
 }
