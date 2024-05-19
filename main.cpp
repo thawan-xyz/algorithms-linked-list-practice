@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 template <typename E>
@@ -23,23 +22,7 @@ class LinkedList {
 public:
     LinkedList() {
         head = tail = cursor = new Node<E>;
-        numberElements = 0;
-    }
-
-    void print() {
-        Node<E>* temp = head->next;
-        for (int i = 0; temp != NULL; ++i) {
-            cout << "[" << i << "] = " << temp->value << endl;
-            temp = temp->next;
-        }
-    }
-
-    E getValue() {
-        if (cursor == tail) {
-            cerr << "Error: there is no element at the current cursor";
-            exit(1);
-        }
-        return (cursor->next)->value;
+        length = 0;
     }
 
     void insert(E value) {
@@ -49,51 +32,57 @@ public:
             tail = cursor->next;
         }
 
-        numberElements++;
+        length++;
     }
 
     E remove() {
-        if (cursor == tail) {
-            cerr << "Error: the list is already empty!";
+        if (cursor->next == NULL) {
+            cerr << "Error: there is no element to remove at the current cursor position!";
             exit(1);
         }
 
-        Node<E>* temp = cursor->next;
-        E value = (cursor->next)->value;
+        Node<E>* tempNode = cursor->next;
+        E tempValue = tempNode->value;
 
-        cursor->next = (cursor->next)->next;
-
-        if (temp == tail) {
+        if (cursor->next == tail) {
             tail = cursor;
-            cursorPrevious();
         }
 
-        numberElements--;
+        cursor->next = cursor->next->next;
 
-        delete temp;
+        length--;
 
-        return value;
+        delete tempNode;
+
+        return tempValue;
     }
 
-    int getCursorPosition() {
-        Node<E>* temp = head;
+    void clear() {
+        Node<E>* tempNode;
 
-        int i = 0;
-        while (cursor != temp) {
-            temp = temp->next;
-            ++i;
+        cursor = head->next;
+        while (cursor != NULL) {
+            tempNode = cursor;
+            cursor = cursor->next;
+
+            delete tempNode;
         }
-        return i;
+
+        cursor = tail = head;
+
+        head->next = NULL;
+
+        length = 0;
     }
 
-    void cursorToPosition (int position) {
-        if (position < 0 || position > numberElements - 1) {
-            cerr << "Error: position is out of range!";
+    void cursorToPos(int cursorPos) {
+        if (cursorPos < 0 || cursorPos > length) {
+            cerr << "Error: this cursor position is out of range!";
             exit(1);
         }
 
         cursor = head;
-        for (int i = 0; i < position; ++i) {
+        for (int i = 0; i < cursorPos; ++i) {
             cursor = cursor->next;
         }
     }
@@ -103,36 +92,57 @@ public:
     }
 
     void cursorToEnd() {
-        while (cursor->next != tail) {
-            cursor = cursor->next;
-        }
+        cursor = tail;
     }
 
-    void cursorPrevious() {
+    void cursorPrev() {
         if (cursor != head) {
-            Node<E>* temp = head;
-            while (cursor != temp->next) {
-                temp = temp->next;
+            Node<E>* tempNode = head;
+            while (tempNode->next != cursor) {
+                tempNode = tempNode->next;
             }
-            cursor = temp;
+            cursor = tempNode;
         }
     }
 
     void cursorNext() {
-        if (cursor->next != tail) {
+        if (cursor != tail) {
             cursor = cursor->next;
         }
     }
 
-    int getNumberElements() {
-        return numberElements;
+    E getValue() {
+        if (cursor == tail) {
+            cerr << "Error: there is no element at the current cursor position!";
+            exit(1);
+        }
+
+        return cursor->next->value;
+    }
+
+    int getCursor() {
+        Node<E>* tempNode = head;
+
+        int i;
+        for (i = 0; tempNode != cursor; ++i) {
+            tempNode = tempNode->next;
+        }
+        return i;
+    }
+
+    int getLength() {
+        return length;
+    }
+
+    Node<E>* getHead() {
+        return head;
     }
 
 private:
     Node<E>* head;
     Node<E>* tail;
     Node<E>* cursor;
-    int numberElements;
+    int length;
 };
 
 int main() {
